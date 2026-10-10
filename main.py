@@ -30,8 +30,8 @@ if not BOT_TOKEN:
 
 REQUIRED_CHANNELS = ["@your channel username"]
 GROUP_JOIN_LINK = "https://t.me/your_group_link"
-OWNER_ID = your tg user id (integer)    #Example: 6282811167
-OWNER_USERNAME = "@your username"
+OWNER_ID = 0    #Example: 6282811167
+OWNER_USERNAME = "@awalali"
 
 bot = telebot.TeleBot(BOT_TOKEN)
 like_tracker = {}   # in-memory cache
