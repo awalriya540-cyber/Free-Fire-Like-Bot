@@ -28,9 +28,9 @@ if not BOT_TOKEN:
     logger.error("❌ BOT_TOKEN not found! Please set your bot token in environment variables.")
     sys.exit(1)
 
-REQUIRED_CHANNELS = ["@your channel username"]
+REQUIRED_CHANNELS = []
 GROUP_JOIN_LINK = "https://t.me/your_group_link"
-OWNER_ID = 0    #Example: 6282811167
+OWNER_ID = 8804023988   #Example: 6282811167
 OWNER_USERNAME = "@awalali"
 
 bot = telebot.TeleBot(BOT_TOKEN)
