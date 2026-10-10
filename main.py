@@ -5,7 +5,7 @@ from telebot import types
 import requests
 
 # একদম শুরুর কোড (আপনার টোকেন ও আইডি সহ)
-BOT_TOKEN = "8941740632:AAGluj-QR0NjrBn2k5z-mlq8R8uwdnWTnko"
+BOT_TOKEN = "8941740632:AAGluj-QRONjrBn2k5z-mlq8R8uwdnWTnko"
 REQUIRED_CHANNELS = [] 
 OWNER_ID = 8804023988
 OWNER_USERNAME = "@awalriya"
