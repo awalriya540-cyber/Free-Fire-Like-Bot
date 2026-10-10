@@ -2,10 +2,9 @@ import os
 import telebot
 import requests
 
-# আপনার টেলিগ্রাম বটের সঠিক টোকেন এবং আইডি নম্বর এখানে বসানো হয়েছে
+# আপনার টেলিগ্রাম বটের টোকেন এবং আইডি নম্বর
 BOT_TOKEN = "8941740632:AAGluj-QR0NjrBn2k5z-mlq8R8uwdnWTnko"
 OWNER_ID = 8804023988
-REQUIRED_CHANNELS = [] # চ্যানেল জয়েন করার ঝামেলা বন্ধ করা হলো
 
 bot = telebot.TeleBot(BOT_TOKEN)
 
@@ -21,9 +20,9 @@ def send_welcome(message):
 
 @bot.message_handler(commands=['like'])
 def send_likes(message):
-    # বট এখন আপনাকে এর আসল মালিক হিসেবে চিনবে
+    # মালিক ভেরিফিকেশন চেক
     if message.from_user.id != OWNER_ID:
-        bot.reply_to(message, "❌ আপনি এই বটের মালিক নন! শুধুমাত্র মালিক এই বট ব্যবহার করতে পারবেন।")
+        bot.reply_to(message, "❌ আপনি এই বটের মালিক নন!")
         return
 
     try:
@@ -32,12 +31,12 @@ def send_likes(message):
             bot.reply_to(message, "⚠️ সঠিক নিয়ম: `/like <Region> <UID>`\nউদাহরণ: `/like BD 13272570211`")
             return
             
-        region = args[1].upper()
-        uid = args[2]
+        region = args[1].upper() # ১ম পজিশন থেকে রিজিয়ন নেওয়া (BD)
+        uid = args[2]            # ২য় পজিশন থেকে ইউআইডি নেওয়া
         
         bot.reply_to(message, f"⏳ আপনার ইউআইডি ({uid})-এ লাইক পাঠানো শুরু হয়েছে... অনুগ্রহ করে ১-২ মিনিট গেমের ভেতরে চেক করুন।")
         
-        # সরাসরি ফ্রি লাইক সার্ভার রিকোয়েস্ট (RapidAPI Key এর ঝামেলা ছাড়া)
+        # পাবলিক ফ্রি লাইক এপিআই রিকোয়েস্ট
         public_api_url = f"https://railway.app{region}&uid={uid}"
         response = requests.get(public_api_url, timeout=15)
         
@@ -47,7 +46,7 @@ def send_likes(message):
             bot.send_message(message.chat.id, "❌ এই মুহূর্তের ফ্রি সার্ভারটি ফুল আছে। দয়া করে কিছুক্ষণ পর আবার চেষ্টা করুন।")
             
     except Exception as e:
-        bot.send_message(message.chat.id, "⏳ সার্ভার প্রсеসিং চলছে, দয়া করে আপনার গেমের প্রোফাইলটি চেক করে দেখুন।")
+        bot.send_message(message.chat.id, "⏳ সার্ভার প্রসেসিং চলছে, দয়া করে আপনার গেমের প্রোফাইলটি চেক করে দেখুন।")
 
 if __name__ == "__main__":
     bot.infinity_polling()
